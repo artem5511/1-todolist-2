@@ -25,9 +25,15 @@ export const Todolist: FC<TodoListPropsType> = (props)=>  {
             <button>+</button>
         </div>
         <ul>
-            <li><input type="checkbox" checked={true}/> <span>{props.tasks[0].title}</span></li>
-            <li><input type="checkbox" checked={true}/> <span>{props.tasks[1].title}</span></li>
-            <li><input type="checkbox" checked={false}/> <span>{props.tasks[2].title}</span></li>
+            {
+                props.tasks.map(el=> <li><input type="checkbox" checked={el.isDone}/> <span>{el.title}</span>
+                        <button onClick={ () => { alert(el.id)}}>x</button>
+                    </li>
+                )
+            }
+            {/*<li><input type="checkbox" checked={true}/> <span>{props.tasks[0].title}</span></li>*/}
+            {/*<li><input type="checkbox" checked={true}/> <span>{props.tasks[1].title}</span></li>*/}
+            {/*<li><input type="checkbox" checked={false}/> <span>{props.tasks[2].title}</span></li>*/}
         </ul>
         <div>
             <button>All</button>
