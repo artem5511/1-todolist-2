@@ -1,12 +1,12 @@
 import React, {FC} from 'react';
 import '../App.css';
-import {TaskType} from '../App';
+import {FilterValueType, TaskType} from '../App';
 
 type TodoListPropsType = {
     title: string
     tasks: Array<TaskType>
     deleteTask: Function
-    changeFilter: Function
+    changeFilter: (value: FilterValueType) => void
 }
 
 

@@ -8,7 +8,7 @@ export type TaskType = {
     isDone: boolean
 }
 
-type FilterValueType = 'all' | 'completed'| 'active';
+export type FilterValueType = 'all' | 'completed'| 'active';
 
 function App() {
     const initTasks: TaskType[] = [
@@ -28,7 +28,6 @@ function App() {
 
 
     const deleteTask = (id: number) => {
-        debugger
        let resultTasks = tasks.filter(el=>el.id !== id)
         setTasks(resultTasks);
      }
