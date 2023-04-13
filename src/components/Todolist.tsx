@@ -37,6 +37,11 @@ export const Todolist: FC<TodoListPropsType> = (props) => {
     const onChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
         setNewTitle(event.currentTarget.value)
     }
+    const deleteTaskHandler = (eID: string) => {
+        props.deleteTask(eID)
+    }
+
+
 
     return (
         <div className={todoClasses}>
@@ -52,12 +57,13 @@ export const Todolist: FC<TodoListPropsType> = (props) => {
             <ul>
                 {
                     props.tasks.map(el => {
+                            // const deleteTaskHandler = () => {
+                            //     props.deleteTask(el.id)
+                            // }
                             return (
                                 <li><input type="checkbox" checked={el.isDone}/>
                                     <span>{el.title}</span>
-                                    <button onClick={() => {
-                                        props.deleteTask(el.id)
-                                    }}>x
+                                    <button onClick={() => deleteTaskHandler(el.id)}>x
                                     </button>
                                 </li>
                             )
