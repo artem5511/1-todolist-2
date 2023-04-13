@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React, {FC, useState} from 'react';
 import '../App.css';
 import {FilterValueType, TaskType} from '../App';
 
@@ -7,7 +7,7 @@ type TodoListPropsType = {
     tasks: Array<TaskType>
     deleteTask: Function
     changeFilter: (value: FilterValueType) => void
-    addTask: () => void
+    addTask: (newTitle: string) => void
 }
 
 
@@ -20,12 +20,15 @@ export const Todolist: FC<TodoListPropsType> = (props)=>  {
         }
     }
     const todoClasses = isAllTasksNotIsDone ? "todolist1" : "todolist"
+    let [newTitle, setNewTitle] = useState('');
+    console.log(newTitle)
+
     return (
     <div className={todoClasses}>
         <h3>{props.title}</h3>
         <div>
-            <input/>
-            <button onClick={()=>props.addTask()}>+</button>
+            <input onChange={(event)=>setNewTitle(event.currentTarget.value)}/>
+            <button onClick={()=>props.addTask(newTitle)}>+</button>
         </div>
         <ul>
             {

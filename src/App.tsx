@@ -44,11 +44,13 @@ function App() {
         tasksForTodolist = tasks.filter(el => el.isDone === false);
     }
 
-    const addTask = () => {
+
+    const addTask = (newTitle: string) => {
         console.log('newtask')
-        const newTask = {id: v1(), title: 'newTitle', isDone: false}
-        const newObj = [newTask, ...tasks]
-        setTasks(newObj)
+        const newTask = {id: v1(), title: newTitle, isDone: false}
+        // const newObj = [newTask, ...tasks]
+        // setTasks(newObj)
+        setTasks([newTask, ...tasks])
     }
 
     return (
