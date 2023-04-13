@@ -1,6 +1,7 @@
 import React, {ChangeEvent, FC, useState} from 'react';
 import '../App.css';
 import {FilterValueType, TaskType} from '../App';
+import {Button} from './Button';
 
 type TodoListPropsType = {
     title: string
@@ -41,7 +42,19 @@ export const Todolist: FC<TodoListPropsType> = (props) => {
         props.deleteTask(eID)
     }
 
-
+    // const AllChangeFilterHandler = () => {
+    //     props.changeFilter("all")
+    // }
+    // const ActiveChangeFilterHandler = () => {
+    //     props.changeFilter("active")
+    // }
+    // const CompletedChangeFilterHandler = () => {
+    //     props.changeFilter("completed")
+    // }
+    //
+    const tsarFunction = (filterValue: FilterValueType) => {
+        props.changeFilter(filterValue)
+        }
 
     return (
         <div className={todoClasses}>
@@ -53,6 +66,7 @@ export const Todolist: FC<TodoListPropsType> = (props) => {
                 {/*    props.addTask(newTitle)*/}
                 {/*    setNewTitle('')*/}
                 {/*}}>+</button>*/}
+                <Button name={'+'} ignition={addTaskHandler}    />
             </div>
             <ul>
                 {
@@ -75,17 +89,29 @@ export const Todolist: FC<TodoListPropsType> = (props) => {
                 {/*<li><input type="checkbox" checked={false}/> <span>{props.tasks[2].title}</span></li>*/}
             </ul>
             <div>
-                <button onClick={() => {
-                    props.changeFilter("all")
-                }}>All
+                {/*<button onClick={() => {*/}
+                {/*    props.changeFilter("all")*/}
+                {/*}}>All*/}
+                {/*</button>*/}
+                {/*<button onClick={() => {*/}
+                {/*    props.changeFilter("completed")*/}
+                {/*}}>Active*/}
+                {/*</button>*/}
+                {/*<button onClick={() => {*/}
+                {/*    props.changeFilter("active")*/}
+                {/*}}>Completed*/}
+                {/*</button> */}
+                {/*<button onClick={AllChangeFilterHandler}>All*/}
+                {/*</button>*/}
+                {/*<button onClick={ActiveChangeFilterHandler}>Active*/}
+                {/*</button>*/}
+                {/*<button onClick={CompletedChangeFilterHandler}>Completed*/}
+                {/*</button>*/}
+                <button onClick={()=>{tsarFunction('all')}}>All
                 </button>
-                <button onClick={() => {
-                    props.changeFilter("completed")
-                }}>Active
+                <button onClick={()=>{tsarFunction('active')}}>Active
                 </button>
-                <button onClick={() => {
-                    props.changeFilter("active")
-                }}>Completed
+                <button onClick={()=>{tsarFunction('completed')}}>Completed
                 </button>
             </div>
         </div>
