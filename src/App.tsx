@@ -51,6 +51,9 @@ function App() {
         // setTasks(newObj)
         setTasks([newTask, ...tasks])
     }
+    const changeTaskStatus = (taskId: string, newIsDoneValue: boolean) => {
+       setTasks(tasks.map(el => el.id === taskId ? {...el, isDone : newIsDoneValue} : el))
+    }
 
     return (
         <div className="App">
@@ -60,6 +63,7 @@ function App() {
                 deleteTask={deleteTask}
                 changeFilter={changeFilter}
                 addTask={addTask}
+                changeTaskStatus={changeTaskStatus}
             />
             {/*<Todolist title={"What to buy"} tasks={tasks1}/>*/}
             {/*<Todolist title={"What to learn"}/>*/}

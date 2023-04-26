@@ -9,6 +9,7 @@ type TodoListPropsType = {
     deleteTask: Function
     changeFilter: (value: FilterValueType) => void
     addTask: (newTitle: string) => void
+    changeTaskStatus: (taskId: string, newIsDoneValue: boolean) => void
 }
 
 
@@ -54,7 +55,7 @@ export const Todolist: FC<TodoListPropsType> = (props) => {
     //
     const tsarFunction = (filterValue: FilterValueType) => {
         props.changeFilter(filterValue)
-        }
+    }
 
     return (
         <div className={todoClasses}>
@@ -66,7 +67,7 @@ export const Todolist: FC<TodoListPropsType> = (props) => {
                 {/*    props.addTask(newTitle)*/}
                 {/*    setNewTitle('')*/}
                 {/*}}>+</button>*/}
-                <Button name={'+'} ignition={addTaskHandler}    />
+                <Button name={'+'} ignition={addTaskHandler}/>
             </div>
             <ul>
                 {
@@ -75,7 +76,13 @@ export const Todolist: FC<TodoListPropsType> = (props) => {
                             //     props.deleteTask(el.id)
                             // }
                             return (
-                                <li><input type="checkbox" checked={el.isDone}/>
+                                <li>
+                                    <input type="checkbox"
+                                           checked={el.isDone}
+                                           onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                                               props.changeTaskStatus(el.id, e.currentTarget.checked)
+                                           }}
+                                    />
                                     <span>{el.title}</span>
                                     <button onClick={() => deleteTaskHandler(el.id)}>x
                                     </button>
@@ -107,11 +114,17 @@ export const Todolist: FC<TodoListPropsType> = (props) => {
                 {/*</button>*/}
                 {/*<button onClick={CompletedChangeFilterHandler}>Completed*/}
                 {/*</button>*/}
-                <button onClick={()=>{tsarFunction('all')}}>All
+                <button onClick={() => {
+                    tsarFunction('all')
+                }}>All
                 </button>
-                <button onClick={()=>{tsarFunction('active')}}>Active
+                <button onClick={() => {
+                    tsarFunction('active')
+                }}>Active
                 </button>
-                <button onClick={()=>{tsarFunction('completed')}}>Completed
+                <button onClick={() => {
+                    tsarFunction('completed')
+                }}>Completed
                 </button>
             </div>
         </div>
