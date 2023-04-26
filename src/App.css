@@ -15,22 +15,24 @@
 .todolist1 {
   border: 3px solid darkred;
   border-radius: 2px;
-  padding: 40px;
+  padding: 30px;
   background-color: mediumaquamarine;
 }
 .todolist2 {
   border: 3px solid darkred;
   border-radius: 2px;
-  padding: 40px;
+  padding: 30px;
   background-color: hotpink;
 }
 
 .task {
   font-weight: bold;
+  margin-left: 5px;
 }
 .task-not-isdone {
   font-weight: normal;
-  text-decoration: line-through ;
+  text-decoration: line-through;
+  margin-left: 5px;
 }
 .filter-btn {
   background-color: darkmagenta;
@@ -57,4 +59,15 @@ li {
   display: flex;
   justify-content: space-between;
   padding: 1px 0;
+}
+
+h3 {
+  text-align: center;
+  font-size: xx-large;
+  margin: 2px;
+}
+
+.input-error {
+  border: 2px solid red;
+  outline: none;
 }

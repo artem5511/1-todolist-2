@@ -19,7 +19,7 @@ function App() {
     ]
 
     let [tasks, setTasks] = useState(initTasks);
-    let [filter, setFilter] = useState<FilterValueType>('active');
+    let [filter, setFilter] = useState<FilterValueType>('all');
 
     // const tasks1: TaskType[] = [
     //     {id: 1, title: "HTML & CSS", isDone: false},

@@ -2,6 +2,8 @@ import React, {ChangeEvent, FC, useState} from 'react';
 import '../App.css';
 import {FilterValueType, TaskType} from '../App';
 import {Button} from './Button';
+import {findAllByDisplayValue} from '@testing-library/react';
+import {isValidDateValue} from '@testing-library/user-event/dist/utils';
 
 type TodoListPropsType = {
     title: string
@@ -22,12 +24,27 @@ export const Todolist: FC<TodoListPropsType> = (props) => {
             break;
         }
     }
-    const todoClasses = isAllTasksNotIsDone ? "todolist2" : "todolist1"
+    const todoClasses = isAllTasksNotIsDone ? "todolist2" : "todolist1";
     let [newTitle, setNewTitle] = useState('');
-    console.log(newTitle)
+    let [error, setError] = useState(false);
 
+
+    const titleMaxLenght = 15
+    const isTitleLenghtTooLong: boolean = newTitle.length > titleMaxLenght
+    const isAddBtnDisabled: boolean = !newTitle.length || isTitleLenghtTooLong
+    const titleMaxLenghtWarning = isTitleLenghtTooLong
+        ? <div style={{color: "red"}}>Title is too long!</div>
+        : null
+    const userMessage = error
+        ? <div style={{color: "red"}}>Title is required!</div>
+        : null
     const addTaskHandler = () => {
-        props.addTask(newTitle)
+        const trimmedTitle = newTitle.trim()
+        if (trimmedTitle) {
+            props.addTask(newTitle)
+        } else {
+            setError(true)
+        }
         setNewTitle('')
     }
 
@@ -38,6 +55,7 @@ export const Todolist: FC<TodoListPropsType> = (props) => {
     }
 
     const onChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+        error && setError(false)
         setNewTitle(event.currentTarget.value)
     }
     const deleteTaskHandler = (eID: string) => {
@@ -62,21 +80,32 @@ export const Todolist: FC<TodoListPropsType> = (props) => {
         <div className={todoClasses}>
             <h3>{props.title}</h3>
             <div>
-                <input value={newTitle} onKeyPress={onKeyPressHandler} onChange={onChangeHandler}/>
-                {/*<button onClick={addTaskHandler}>+</button>*/}
+                <input className={error || isTitleLenghtTooLong? "input-error" : undefined}
+                    placeholder={'please, enter title'}
+                    value={newTitle}
+                    onKeyPress={onKeyPressHandler}
+                    onChange={onChangeHandler}/>
+                <button disabled={isAddBtnDisabled}
+                        onClick={addTaskHandler}>+
+                </button>
+                {titleMaxLenghtWarning}
+                {userMessage}
                 {/*<button onClick={() => {*/}
                 {/*    props.addTask(newTitle)*/}
                 {/*    setNewTitle('')*/}
                 {/*}}>+</button>*/}
-                <Button  name={'+'} ignition={addTaskHandler}/>
+                {/*<Button  name={'+'} ignition={addTaskHandler}/>*/}
             </div>
             <ul>
                 {
                     props.tasks.map(el => {
-                            const deleteTaskHandler = () => {props.deleteTask(el.id)}
+                            const deleteTaskHandler = () => {
+                                props.deleteTask(el.id)
+                            }
                             const changeTaskStatus = (e: ChangeEvent<HTMLInputElement>) => {
-                                    props.changeTaskStatus(el.id, e.currentTarget.checked)}
-                                const tasksClasess = el.isDone ? "task-not-isdone" : "task"
+                                props.changeTaskStatus(el.id, e.currentTarget.checked)
+                            }
+                            const tasksClasess = el.isDone ? "task-not-isdone" : "task"
                             return (
                                 <li>
                                     <div>
@@ -87,7 +116,7 @@ export const Todolist: FC<TodoListPropsType> = (props) => {
                                         <span className={tasksClasess}>{el.title}</span>
                                     </div>
 
-                                    <button  onClick={deleteTaskHandler}>x
+                                    <button onClick={deleteTaskHandler}>x
                                     </button>
                                 </li>
                             )
@@ -117,17 +146,20 @@ export const Todolist: FC<TodoListPropsType> = (props) => {
                 {/*</button>*/}
                 {/*<button onClick={CompletedChangeFilterHandler}>Completed*/}
                 {/*</button>*/}
-                <button className={props.filter === "all" ? "filter-btn filter-btn-active" : "filter-btn"} onClick={() => {
-                    tsarFunction('all')
-                }}>All
+                <button className={props.filter === "all" ? "filter-btn filter-btn-active" : "filter-btn"}
+                        onClick={() => {
+                            tsarFunction('all')
+                        }}>All
                 </button>
-                <button className={props.filter === "active" ? "filter-btn filter-btn-active" : "filter-btn"} onClick={() => {
-                    tsarFunction('active')
-                }}>Active
+                <button className={props.filter === "active" ? "filter-btn filter-btn-active" : "filter-btn"}
+                        onClick={() => {
+                            tsarFunction('active')
+                        }}>Active
                 </button>
-                <button className={props.filter === "completed" ? "filter-btn filter-btn-active" : "filter-btn"} onClick={() => {
-                    tsarFunction('completed')
-                }}>Completed
+                <button className={props.filter === "completed" ? "filter-btn filter-btn-active" : "filter-btn"}
+                        onClick={() => {
+                            tsarFunction('completed')
+                        }}>Completed
                 </button>
             </div>
         </div>
