@@ -1,4 +1,5 @@
 import React from 'react';
+import './Button.css';
 
 type PropsType = {
     name: string
@@ -10,6 +11,6 @@ export const Button = (props:PropsType) => {
         props.ignition()
     }
     return (
-            <button onClick={onCLickHandler}>{props.name} </button>
+            <button className={"btnaddtasks"} onClick={onCLickHandler}>{props.name} </button>
     );
 };

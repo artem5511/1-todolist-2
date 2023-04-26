@@ -64,6 +64,7 @@ function App() {
                 changeFilter={changeFilter}
                 addTask={addTask}
                 changeTaskStatus={changeTaskStatus}
+                filter={filter}
             />
             {/*<Todolist title={"What to buy"} tasks={tasks1}/>*/}
             {/*<Todolist title={"What to learn"}/>*/}
