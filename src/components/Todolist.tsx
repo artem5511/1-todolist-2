@@ -7,10 +7,11 @@ import {isValidDateValue} from '@testing-library/user-event/dist/utils';
 
 type TodoListPropsType = {
     title: string
+    todolistID: string
     tasks: Array<TaskType>
     filter: FilterValueType
     deleteTask: Function
-    changeFilter: (value: FilterValueType) => void
+    changeFilter: (todolistID: string, value: FilterValueType) => void
     addTask: (newTitle: string) => void
     changeTaskStatus: (taskId: string, newIsDoneValue: boolean) => void
 }
@@ -73,7 +74,7 @@ export const Todolist: FC<TodoListPropsType> = (props) => {
     // }
     //
     const tsarFunction = (filterValue: FilterValueType) => {
-        props.changeFilter(filterValue)
+        props.changeFilter(props.todolistID, filterValue)
     }
 
     return (
