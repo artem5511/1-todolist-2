@@ -55,17 +55,23 @@ function App() {
        setTasks(tasks.map(el => el.id === taskId ? {...el, isDone : newIsDoneValue} : el))
     }
 
+    const arr=[0,1,2,3]
+
     return (
         <div className="App">
-            <Todolist
-                title={"What to learn"}
-                tasks={tasksForTodolist}
-                deleteTask={deleteTask}
-                changeFilter={changeFilter}
-                addTask={addTask}
-                changeTaskStatus={changeTaskStatus}
-                filter={filter}
-            />
+            {arr.map(el=>{
+                return(
+                    <Todolist
+                        title={"What to learn"}
+                        tasks={tasksForTodolist}
+                        deleteTask={deleteTask}
+                        changeFilter={changeFilter}
+                        addTask={addTask}
+                        changeTaskStatus={changeTaskStatus}
+                        filter={filter}
+                    />
+                )
+            })}
             {/*<Todolist title={"What to buy"} tasks={tasks1}/>*/}
             {/*<Todolist title={"What to learn"}/>*/}
         </div>
