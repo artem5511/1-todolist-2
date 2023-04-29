@@ -9,18 +9,52 @@ export type TaskType = {
     isDone: boolean
 }
 
+type AssocTaskType = {
+    [key: string] : TaskType[]
+}
+
+type todoListsType = { id: string, title: string, filter: FilterValueType}
+
 export type FilterValueType = 'all' | 'completed' | 'active';
 // type todoListsType={id: string, title: string, filter: FilterValueType}
 
-function App() {
-    const initTasks: TaskType[] = [
-        {id: v1(), title: "HTML & CSS", isDone: true},
-        {id: v1(), title: "CSS & SCSS", isDone: true},
-        {id: v1(), title: "ES6/TS", isDone: false},
-    ]
 
-    let [tasks, setTasks] = useState(initTasks);
+function App() {
+    // const initTasks: TaskType[] = [
+    //     {id: v1(), title: "HTML & CSS", isDone: true},
+    //     {id: v1(), title: "CSS & SCSS", isDone: true},
+    //     {id: v1(), title: "ES6/TS", isDone: false},
+    // ]
+
+    let todolistsID1=v1();
+    let todolistsID2=v1();
+
+    let [todolists, setTodolists] = useState<Array<todoListsType>>([
+        {id: todolistsID1, title: "What to learn", filter: 'all'},
+        {id: todolistsID2, title: "What to buy", filter: 'all'}
+    ])
+
+    let [tasks, setTasks] = useState<AssocTaskType>({
+        [todolistsID1]: [
+            {id: v1(), title: "HTML & CSS", isDone: true},
+            {id: v1(), title: "JS", isDone: true},
+            {id: v1(), title: "ReactJS", isDone: false},
+            {id: v1(), title: "Rest API", isDone: false},
+            {id: v1(), title: "GraphQL", isDone: false}
+        ],
+        [todolistsID2]: [
+            {id: v1(), title: "HTML & CSS2", isDone: true},
+            {id: v1(), title: "JS2", isDone: true},
+            {id: v1(), title: "ReactJS2", isDone: false},
+            {id: v1(), title: "Rest API2", isDone: false},
+            {id: v1(), title: "GraphQL2", isDone: false}
+        ]
+    });
+
+
+    // let [tasks, setTasks] = useState(initTasks);
     // let [filter, setFilter] = useState<FilterValueType>('all');
+
 
     // const tasks1: TaskType[] = [
     //     {id: 1, title: "HTML & CSS", isDone: false},
@@ -57,12 +91,7 @@ function App() {
        setTasks(tasks.map(el => el.id === taskId ? {...el, isDone : newIsDoneValue} : el))
     }
 
-    const arr=[0,1,2,3]
-
-    let [todolists, setTodolists] = useState([
-        {id: v1(), title: "What to learn", filter: 'all'},
-        {id: v1(), title: "What to buy", filter: 'all'}
-    ])
+    // const arr=[0,1,2,3]
 
     return (
         <div className="App">
