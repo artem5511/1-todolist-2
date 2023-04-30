@@ -13,7 +13,7 @@ type TodoListPropsType = {
     deleteTask: (todoListID: string, taskID: string) => void
     changeFilter: (todolistID: string, value: FilterValueType) => void
     addTask: (todoListID: string, newTitle: string) => void
-    changeTaskStatus: (taskId: string, newIsDoneValue: boolean) => void
+    changeTaskStatus: (todolistID: string, taskId: string, newIsDoneValue: boolean) => void
 }
 
 
@@ -103,7 +103,7 @@ export const Todolist: FC<TodoListPropsType> = (props) => {
                                 props.deleteTask(props.todolistID,el.id)
                             }
                             const changeTaskStatus = (e: ChangeEvent<HTMLInputElement>) => {
-                                props.changeTaskStatus(el.id, e.currentTarget.checked)
+                                props.changeTaskStatus(props.todolistID,el.id, e.currentTarget.checked)
                             }
                             const tasksClasess = el.isDone ? "task-not-isdone" : "task"
                             return (
