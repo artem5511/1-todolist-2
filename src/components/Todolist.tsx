@@ -10,7 +10,7 @@ type TodoListPropsType = {
     todolistID: string
     tasks: Array<TaskType>
     filter: FilterValueType
-    deleteTask: Function
+    deleteTask: (todoListsID: string, taskID: string) => void
     changeFilter: (todolistID: string, value: FilterValueType) => void
     addTask: (newTitle: string) => void
     changeTaskStatus: (taskId: string, newIsDoneValue: boolean) => void
@@ -59,9 +59,9 @@ export const Todolist: FC<TodoListPropsType> = (props) => {
         error && setError(false)
         setNewTitle(event.currentTarget.value)
     }
-    const deleteTaskHandler = (eID: string) => {
-        props.deleteTask(eID)
-    }
+    // const deleteTaskHandler = (eID: string) => {
+    //     props.deleteTask(eID)
+    // }
 
     // const AllChangeFilterHandler = () => {
     //     props.changeFilter("all")
@@ -101,7 +101,7 @@ export const Todolist: FC<TodoListPropsType> = (props) => {
                 {
                     props.tasks.map(el => {
                             const deleteTaskHandler = () => {
-                                props.deleteTask(el.id)
+                                props.deleteTask(props.todolistID,el.id)
                             }
                             const changeTaskStatus = (e: ChangeEvent<HTMLInputElement>) => {
                                 props.changeTaskStatus(el.id, e.currentTarget.checked)

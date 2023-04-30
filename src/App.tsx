@@ -63,7 +63,7 @@ function App() {
     // ]
 
 
-    const deleteTask = (id: string) => {
+    const deleteTask = (todoListsID: string, taskID: string) => {
         let resultTasks = tasks.filter(el => el.id !== id)
         setTasks(resultTasks);
     }
