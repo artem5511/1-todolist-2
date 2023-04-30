@@ -10,7 +10,7 @@ type TodoListPropsType = {
     todolistID: string
     tasks: Array<TaskType>
     filter: FilterValueType
-    deleteTask: (todoListsID: string, taskID: string) => void
+    deleteTask: (todoListID: string, taskID: string) => void
     changeFilter: (todolistID: string, value: FilterValueType) => void
     addTask: (newTitle: string) => void
     changeTaskStatus: (taskId: string, newIsDoneValue: boolean) => void
@@ -62,7 +62,6 @@ export const Todolist: FC<TodoListPropsType> = (props) => {
     // const deleteTaskHandler = (eID: string) => {
     //     props.deleteTask(eID)
     // }
-
     // const AllChangeFilterHandler = () => {
     //     props.changeFilter("all")
     // }

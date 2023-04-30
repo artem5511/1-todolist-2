@@ -26,23 +26,23 @@ function App() {
     //     {id: v1(), title: "ES6/TS", isDone: false},
     // ]
 
-    let todolistsID1=v1();
-    let todolistsID2=v1();
+    let todolistID1=v1();
+    let todolistID2=v1();
 
     let [todolists, setTodolists] = useState<Array<todoListsType>>([
-        {id: todolistsID1, title: "What to learn", filter: 'all'},
-        {id: todolistsID2, title: "What to buy", filter: 'all'}
+        {id: todolistID1, title: "What to learn", filter: 'all'},
+        {id: todolistID2, title: "What to buy", filter: 'all'}
     ])
 
     let [tasks, setTasks] = useState<AssocTaskType>({
-        [todolistsID1]: [
+        [todolistID1]: [
             {id: v1(), title: "HTML & CSS", isDone: true},
             {id: v1(), title: "JS", isDone: true},
             {id: v1(), title: "ReactJS", isDone: false},
             {id: v1(), title: "Rest API", isDone: false},
             {id: v1(), title: "GraphQL", isDone: false}
         ],
-        [todolistsID2]: [
+        [todolistID2]: [
             {id: v1(), title: "HTML & CSS2", isDone: true},
             {id: v1(), title: "JS2", isDone: true},
             {id: v1(), title: "ReactJS2", isDone: false},
@@ -63,15 +63,16 @@ function App() {
     // ]
 
 
-    const deleteTask = (todoListsID: string, taskID: string) => {
-        let resultTasks = tasks.filter(el => el.id !== id)
-        setTasks(resultTasks);
+    const deleteTask = (todoListID: string, taskID: string) => {
+        setTasks({...tasks,[todoListID]:tasks[todoListID].filter(el=>el.id!==taskID)})
+        // let resultTasks = tasks.filter(el => el.id !== id)
+        // setTasks(resultTasks);
     }
     const changeFilter = (todolistID:string, value: FilterValueType) => {
         // setFilter(value);
         setTodolists(todolists.map(el=> el.id===todolistID ? {...el,filter: value} : el))
     }
-
+    // console.log(tasks[todolistsID1])
     // let tasksForTodolist = tasks;
     // if (filter === "completed") {
     //     tasksForTodolist = tasks.filter(el => el.isDone === true);
@@ -82,13 +83,13 @@ function App() {
 
 
     const addTask = (newTitle: string) => {
-        const newTask = {id: v1(), title: newTitle, isDone: false}
+        // const newTask = {id: v1(), title: newTitle, isDone: false}
         // const newObj = [newTask, ...tasks]
         // setTasks(newObj)
-        setTasks([newTask, ...tasks])
+        // setTasks([newTask, ...tasks])s
     }
     const changeTaskStatus = (taskId: string, newIsDoneValue: boolean) => {
-       setTasks(tasks.map(el => el.id === taskId ? {...el, isDone : newIsDoneValue} : el))
+       // setTasks(tasks.map(el => el.id === taskId ? {...el, isDone : newIsDoneValue} : el))
     }
 
     // const arr=[0,1,2,3]
