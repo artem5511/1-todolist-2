@@ -4,6 +4,7 @@ import {FilterValueType, TaskType} from '../App';
 import {Button} from './Button';
 import {findAllByDisplayValue} from '@testing-library/react';
 import {isValidDateValue} from '@testing-library/user-event/dist/utils';
+import {log} from 'util';
 
 type TodoListPropsType = {
     title: string
@@ -14,6 +15,7 @@ type TodoListPropsType = {
     changeFilter: (todolistID: string, value: FilterValueType) => void
     addTask: (todoListID: string, newTitle: string) => void
     changeTaskStatus: (todolistID: string, taskId: string, newIsDoneValue: boolean) => void
+    deleteTodolist: (todolistID: string) => void
 }
 
 
@@ -75,10 +77,14 @@ export const Todolist: FC<TodoListPropsType> = (props) => {
     const tsarFunction = (filterValue: FilterValueType) => {
         props.changeFilter(props.todolistID, filterValue)
     }
-
+const deleteTodolistHandler = () => {
+  props.deleteTodolist(props.todolistID)
+}
     return (
         <div className={todoClasses}>
-            <h3>{props.title}</h3>
+            <h3>{props.title}
+                <button onClick={deleteTodolistHandler}>X</button></h3>
+
             <div>
                 <input className={error || isTitleLenghtTooLong? "input-error" : undefined}
                     placeholder={'please, enter title'}
