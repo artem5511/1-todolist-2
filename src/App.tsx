@@ -82,7 +82,7 @@ function App() {
     // }
 
 
-    const addTask = (newTitle: string) => {
+    const addTask = (todolistID:string, newTitle: string) => {
         // const newTask = {id: v1(), title: newTitle, isDone: false}
         // const newObj = [newTask, ...tasks]
         // setTasks(newObj)

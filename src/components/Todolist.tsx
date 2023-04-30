@@ -12,7 +12,7 @@ type TodoListPropsType = {
     filter: FilterValueType
     deleteTask: (todoListID: string, taskID: string) => void
     changeFilter: (todolistID: string, value: FilterValueType) => void
-    addTask: (newTitle: string) => void
+    addTask: (todoListID: string, newTitle: string) => void
     changeTaskStatus: (taskId: string, newIsDoneValue: boolean) => void
 }
 
@@ -42,7 +42,7 @@ export const Todolist: FC<TodoListPropsType> = (props) => {
     const addTaskHandler = () => {
         const trimmedTitle = newTitle.trim()
         if (trimmedTitle) {
-            props.addTask(newTitle)
+            props.addTask(props.todolistID, newTitle)
         } else {
             setError(true)
         }
