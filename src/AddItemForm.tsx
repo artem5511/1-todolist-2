@@ -1,7 +1,11 @@
-import React, {useState} from 'react';
+import React, {ChangeEvent, useState} from 'react';
 
 const AddItemForm = () => {
     let [newTitle, setNewTitle] = useState('');
+    const onChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+        error && setError(false)
+        setNewTitle(event.currentTarget.value)
+    }
     return (
         <div>
                 <input
