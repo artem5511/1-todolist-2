@@ -6,6 +6,7 @@ const AddItemForm = () => {
         error && setError(false)
         setNewTitle(event.currentTarget.value)
     }
+    const isAddBtnDisabled = !newTitle.length
     return (
         <div>
                 <input
