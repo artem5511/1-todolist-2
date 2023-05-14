@@ -1,6 +1,7 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 const AddItemForm = () => {
+    let [newTitle, setNewTitle] = useState('');
     return (
         <div>
                 <input
