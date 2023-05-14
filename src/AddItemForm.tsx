@@ -3,8 +3,7 @@ import React from 'react';
 const AddItemForm = () => {
     return (
         <div>
-            <div>
-                <input className={error || isTitleLenghtTooLong? "input-error" : undefined}
+                <input
                        placeholder={'please, enter title'}
                        value={newTitle}
                        onKeyPress={onKeyPressHandler}
@@ -14,8 +13,6 @@ const AddItemForm = () => {
                 </button>
                 {titleMaxLenghtWarning}
                 {userMessage}
-
-            </div>
         </div>
     );
 };
