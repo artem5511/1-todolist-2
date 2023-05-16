@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import './App.css';
 import {Todolist} from './components/Todolist';
 import {v1} from 'uuid';
+import AddItemForm from './AddItemForm';
 
 export type TaskType = {
     id: string
@@ -128,6 +129,7 @@ function App() {
             })}
             {/*<Todolist title={"What to buy"} tasks={tasks1}/>*/}
             {/*<Todolist title={"What to learn"}/>*/}
+            <AddItemForm/>
         </div>
     );
 }
