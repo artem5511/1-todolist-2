@@ -1,14 +1,17 @@
-import React, {ChangeEvent, useState} from 'react';
+import React, {ChangeEvent, FC, useState} from 'react';
 
-const AddItemForm = () => {
+type AddItemFormPropsType = {
+    titleMaxLength: number
+}
+
+const AddItemForm: FC<AddItemFormPropsType> = ({titleMaxLength: number}) => {
     let [newTitle, setNewTitle] = useState('');
     const onChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
         error && setError(false)
         setNewTitle(event.currentTarget.value)
     }
     const isAddBtnDisabled = !newTitle.length
-    const titleMaxLenght = 15
-    const isTitleLenghtTooLong: boolean = newTitle.length > titleMaxLenght
+    const isTitleLenghtTooLong: boolean = newTitle.length > titleMaxLength
     const titleMaxLenghtWarning = isTitleLenghtTooLong
         ? <div style={{color: "red"}}>Title is too long!</div>
         : null
